@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package sqrt;
+
+option go_package = "github.com/alhaqz/grpc-learn/greet/proto";
+
+message SqrtRequest {
+    int64 number = 1;
+}
+
+message SqrtResponse {
+    double result = 1;
+}
+
+service SqrtService {
+    rpc Sqrt(SqrtRequest) returns (SqrtResponse);
+}

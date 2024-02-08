@@ -1,0 +1,22 @@
+package main
+
+import (
+	"fmt"
+	"log"
+
+	pb "github.com/alhaqz/grpc-learn/greet/proto"
+)
+
+func (s *GreetServer) GreetManyTimes(in *pb.GreetRequest, stream pb.GreetService_GreetManyTimesServer) error {
+	log.Printf("GreetManyTImes function was invoked with : %v\n", in)
+
+	for i := 0; i < 10; i++ {
+		res := fmt.Sprintf("Hello %s, number %d", in.FirstName, i)
+
+		stream.Send(&pb.GreetResponse{
+			Result: res,
+		})
+	}
+
+	return nil
+}
